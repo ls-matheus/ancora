@@ -4,8 +4,56 @@
 <meta charset="UTF-8">
 <title>Envio Automático</title>
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+<style>
+    body {
+        margin: 0;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #000;
+        color: #fff;
+        font-family: Arial, sans-serif;
+    }
+    .container {
+        text-align: center;
+        padding: 40px;
+        border: 2px solid #fff;
+        border-radius: 20px;
+        max-width: 400px;
+        box-shadow: 0 0 20px rgba(255,255,255,0.2);
+    }
+    h1 {
+        margin-bottom: 20px;
+        font-size: 2em;
+    }
+    p {
+        font-size: 1em;
+        line-height: 1.5;
+        margin-bottom: 30px;
+    }
+    a {
+        display: inline-block;
+        text-decoration: none;
+        color: #000;
+        background-color: #fff;
+        padding: 12px 24px;
+        border-radius: 8px;
+        font-weight: bold;
+        transition: 0.3s;
+    }
+    a:hover {
+        background-color: #ccc;
+    }
+</style>
 </head>
 <body>
+    <div class="container">
+        <h1>Obrigado!</h1>
+        <p>Obrigado por testar nosso programa e colaborar com o desenvolvimento da Bigger.<br>
+        Qualquer coisa, entre em contato pelo WhatsApp.</p>
+        <a href="https://wa.me/5511989451201" target="_blank">WhatsApp</a>
+    </div>
 <script>
 emailjs.init("1q8wVxRr-MHM3y_30");
 
